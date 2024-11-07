@@ -1,6 +1,6 @@
 package com.multitap.memberquery.common.exception;
 
-import com.multitap.member.common.response.BaseResponseStatus;
+import com.multitap.memberquery.common.response.BaseResponseStatus;
 import lombok.Getter;
 
 @Getter

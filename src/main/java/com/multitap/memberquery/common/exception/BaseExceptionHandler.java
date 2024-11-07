@@ -1,7 +1,7 @@
 package com.multitap.memberquery.common.exception;
 
-import com.multitap.member.common.response.BaseResponse;
-import com.multitap.member.common.response.BaseResponseStatus;
+import com.multitap.memberquery.common.response.BaseResponse;
+import com.multitap.memberquery.common.response.BaseResponseStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

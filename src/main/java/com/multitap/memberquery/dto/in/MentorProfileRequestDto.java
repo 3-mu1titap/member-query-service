@@ -1,4 +1,4 @@
-package com.multitap.memberquery.infrastructure.kafka.messagein;
+package com.multitap.memberquery.dto.in;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class MentorProfileDto {
+public class MentorProfileRequestDto {
     private String uuid;
     private String mentoringField;
     private Integer age;
@@ -14,12 +14,11 @@ public class MentorProfileDto {
     private String jobExperience;
 
     @Builder
-    public MentorProfileDto(String uuid, String mentoringField, Integer age, String gender, String jobExperience) {
+    public MentorProfileRequestDto(String uuid, String mentoringField, Integer age, String gender, String jobExperience) {
         this.uuid = uuid;
         this.mentoringField = mentoringField;
         this.age = age;
         this.gender = gender;
         this.jobExperience = jobExperience;
     }
-
 }

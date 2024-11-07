@@ -1,4 +1,4 @@
-package com.multitap.memberquery.infrastructure.kafka.messagein;
+package com.multitap.memberquery.kafka.messagein;
 
 import lombok.Builder;
 import lombok.Getter;

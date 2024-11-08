@@ -1,5 +1,4 @@
 package com.multitap.memberquery.dto.in;
-
 import com.multitap.memberquery.entity.MemberInfo;
 import com.multitap.memberquery.kafka.messagein.HashtagDto;
 import lombok.Builder;
@@ -12,23 +11,46 @@ import java.util.List;
 @NoArgsConstructor
 public class HashtagRequestDto {
 
-    private Long hashtagId;
+    private List<HashtagId> hashtagId;
 
     @Builder
-    public HashtagRequestDto(Long hashtagId) {
+    public HashtagRequestDto(List<HashtagId> hashtagId) {
         this.hashtagId = hashtagId;
     }
 
-    public static HashtagRequestDto from(HashtagDto hashtagDto) {
+    public static HashtagRequestDto from(List<HashtagDto> hashtagDtoList) {
+
+        if (hashtagDtoList == null || hashtagDtoList.isEmpty()) {
+            throw new IllegalArgumentException("hashtagDtoList cannot be null or empty");
+        }
+
+        List<HashtagId> hashtagIds = hashtagDtoList.stream()
+                .map(dto -> new HashtagId(dto.getHashtagId()))
+                .toList();
+
         return HashtagRequestDto.builder()
-                .hashtagId(hashtagDto.getHashtagId())
+                .hashtagId(hashtagIds)
                 .build();
     }
 
-    public static MemberInfo toEntity(List<HashtagRequestDto> hashtagRequestDto, String uuid) {
+    public MemberInfo toEntity(HashtagRequestDto hashtagRequestDto, MemberInfo memberInfo) {
         return MemberInfo.builder()
-                .uuid(uuid)
+                .id(memberInfo.getId())
+                .memberRequestDto(memberInfo.getMemberRequestDto())
                 .hashtagRequestDto(hashtagRequestDto)
+                .mentorProfileRequestDto(memberInfo.getMentorProfileRequestDto())
+                .menteeProfileRequestDto(memberInfo.getMenteeProfileRequestDto())
                 .build();
+    }
+
+
+    @Getter
+    @NoArgsConstructor
+    public static class HashtagId {
+        private Long hashtagId;
+
+        public HashtagId(Long hashtagId) {
+            this.hashtagId = hashtagId;
+        }
     }
 }

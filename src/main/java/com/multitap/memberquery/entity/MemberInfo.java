@@ -9,7 +9,6 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
 
 @Document(collation = "memberInfo")
 @Data
@@ -17,9 +16,10 @@ import java.util.List;
 public class MemberInfo {
 
     @Id
-    private String uuid;
+    private String id;
+
     private MemberRequestDto memberRequestDto;
-    private List<HashtagRequestDto> hashtagRequestDto;
+    private HashtagRequestDto hashtagRequestDto;
     private MentorProfileRequestDto mentorProfileRequestDto;
     private MenteeProfileRequestDto menteeProfileRequestDto;
 

@@ -1,7 +1,6 @@
 package com.multitap.memberquery.kafka.messagein;
 
 import com.multitap.memberquery.dto.in.HashtagRequestDto;
-import com.multitap.memberquery.entity.MemberInfo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,16 +21,14 @@ public class HashtagDto {
         this.hashtagId = hashtagId;
     }
 
-    public static HashtagRequestDto from(HashtagDto hashtagDto) {
-        return HashtagRequestDto.builder()
-                .hashtagId(hashtagDto.getHashtagId())
-                .build();
-    }
+    public static HashtagRequestDto toRequestDto(List<HashtagDto> hashtagDtoList) {
+        String uuid = hashtagDtoList.get(0).getUuid();
+        List<HashtagRequestDto.HashtagId> hashtagIds = hashtagDtoList.stream()
+                .map(dto -> new HashtagRequestDto.HashtagId(dto.getHashtagId()))
+                .toList();
 
-    public MemberInfo toEntity(List<HashtagRequestDto> hashtagRequestDto) {
-        return MemberInfo.builder()
-                .uuid(uuid)
-                .hashtagRequestDto(hashtagRequestDto)
+        return HashtagRequestDto.builder()
+                .hashtagId(hashtagIds)
                 .build();
     }
 }

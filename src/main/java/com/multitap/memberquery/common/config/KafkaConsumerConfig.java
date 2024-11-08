@@ -1,8 +1,9 @@
 package com.multitap.memberquery.common.config;
 
-import com.multitap.memberquery.kafka.messagein.HashtagDto;
-import com.multitap.memberquery.kafka.messagein.MemberDto;
-import com.multitap.memberquery.kafka.utils.ListDeserializer;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.multitap.memberquery.kafka.messagein.*;
+import com.multitap.memberquery.kafka.messagein.MentorProfileDto;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +15,6 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
-import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +49,17 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
-        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(List.class, false));
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JavaType type = objectMapper.getTypeFactory().constructCollectionType(List.class, HashtagDto.class);
+
+        JsonDeserializer<List<HashtagDto>> jsonDeserializer = new JsonDeserializer<>(type, objectMapper, false);
+
+        return new DefaultKafkaConsumerFactory<>(
+                props,
+                new StringDeserializer(),
+                new ErrorHandlingDeserializer<>(jsonDeserializer)
+        );
     }
 
     @Bean
@@ -58,6 +68,43 @@ public class KafkaConsumerConfig {
         factory.setConsumerFactory(hashtagConsumerFactory());
         return factory;
     }
+
+    @Bean
+    public ConsumerFactory<String, MentorProfileDto> memtorProfileConsumerFactory() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092, localhost:39092, localhost:49092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "member-consumer-group");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(MentorProfileDto.class, false));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, MentorProfileDto> mentorProfileDtoListener() {
+        ConcurrentKafkaListenerContainerFactory<String, MentorProfileDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(memtorProfileConsumerFactory());
+        return factory;
+    }
+
+    @Bean
+    public ConsumerFactory<String, MenteeProfileDto> memteeProfileConsumerFactory() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092, localhost:39092, localhost:49092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "member-consumer-group");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(MenteeProfileDto.class, false));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, MenteeProfileDto> menteeProfileDtoListener() {
+        ConcurrentKafkaListenerContainerFactory<String, MenteeProfileDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(memteeProfileConsumerFactory());
+        return factory;
+    }
+
 
 }
 

@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class MemberRequestDto {
-    private String uuid;
     private String name;
     private String nickName;
     private String email;
@@ -17,8 +16,7 @@ public class MemberRequestDto {
     private String phoneNumber;
 
     @Builder
-    public MemberRequestDto(String uuid, String name, String nickName, String email, String accountId, String phoneNumber) {
-        this.uuid = uuid;
+    public MemberRequestDto(String name, String nickName, String email, String accountId, String phoneNumber) {
         this.name = name;
         this.nickName = nickName;
         this.email = email;
@@ -28,7 +26,6 @@ public class MemberRequestDto {
 
     public static MemberRequestDto from(MemberDto memberDto) {
         return MemberRequestDto.builder()
-                .uuid(memberDto.getUuid())
                 .name(memberDto.getName())
                 .nickName(memberDto.getNickName())
                 .email(memberDto.getEmail())
@@ -37,9 +34,9 @@ public class MemberRequestDto {
                 .build();
     }
 
-    public MemberInfo toEntity(MemberRequestDto memberRequestDto) {
+    public MemberInfo toEntity(MemberRequestDto memberRequestDto, String uuid) {
         return MemberInfo.builder()
-                .uuid(memberRequestDto.getUuid())
+                .id(uuid)
                 .memberRequestDto(memberRequestDto)
                 .build();
     }

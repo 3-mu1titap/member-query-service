@@ -34,6 +34,16 @@ public class MemberRequestDto {
                 .build();
     }
 
+    public MemberRequestDto updateNickNameAndPhoneNumber(NicknamePhoneRequestDto nicknamePhoneRequestDto, MemberRequestDto memberRequestDto) {
+        return MemberRequestDto.builder()
+                .name(memberRequestDto.name)
+                .nickName(nicknamePhoneRequestDto.getNickName())
+                .email(memberRequestDto.email)
+                .accountId(memberRequestDto.accountId)
+                .phoneNumber(nicknamePhoneRequestDto.getPhoneNumber())
+                .build();
+    }
+
     public MemberInfo toEntity(MemberRequestDto memberRequestDto, String uuid) {
         return MemberInfo.builder()
                 .id(uuid)

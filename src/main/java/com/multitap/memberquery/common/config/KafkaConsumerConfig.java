@@ -105,6 +105,24 @@ public class KafkaConsumerConfig {
         return factory;
     }
 
+    @Bean
+    public ConsumerFactory<String, NicknamePhoneDto> nicknamePhoneConsumerFactory() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092, localhost:39092, localhost:49092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "member-consumer-group");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(NicknamePhoneDto.class, false));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, NicknamePhoneDto> nicknamePhoneDtoListener() {
+        ConcurrentKafkaListenerContainerFactory<String, NicknamePhoneDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(nicknamePhoneConsumerFactory());
+        return factory;
+    }
+
 
 }
 

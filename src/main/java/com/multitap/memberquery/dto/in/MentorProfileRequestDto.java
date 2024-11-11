@@ -1,7 +1,6 @@
 package com.multitap.memberquery.dto.in;
 
 import com.multitap.memberquery.entity.MemberInfo;
-import com.multitap.memberquery.kafka.messagein.HashtagDto;
 import com.multitap.memberquery.kafka.messagein.MentorProfileDto;
 import lombok.Builder;
 import lombok.Getter;

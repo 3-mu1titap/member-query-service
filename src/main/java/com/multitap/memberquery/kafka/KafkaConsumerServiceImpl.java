@@ -2,10 +2,7 @@ package com.multitap.memberquery.kafka;
 
 import com.multitap.memberquery.common.exception.BaseException;
 import com.multitap.memberquery.common.response.BaseResponseStatus;
-import com.multitap.memberquery.dto.in.HashtagRequestDto;
-import com.multitap.memberquery.dto.in.MemberRequestDto;
-import com.multitap.memberquery.dto.in.MenteeProfileRequestDto;
-import com.multitap.memberquery.dto.in.MentorProfileRequestDto;
+import com.multitap.memberquery.dto.in.*;
 import com.multitap.memberquery.entity.MemberInfo;
 import com.multitap.memberquery.infrastructure.MemberInfoRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +16,17 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
 
     private final MemberInfoRepository memberInfoRepository;
 
-
     public void addMember(MemberRequestDto memberRequestDto, String uuid) {
         memberInfoRepository.save(memberRequestDto.toEntity(memberRequestDto, uuid));
-        log.info("memberInfo, {}", uuid);
+        log.info("회원가입 정보 저장 성공,{}", memberRequestDto.getName());
+    }
+
+    @Override
+    public void addNicknamePhone(NicknamePhoneRequestDto nicknamePhoneRequestDto, String uuid) {
+        MemberInfo memberInfo = memberInfoRepository.findById(uuid).orElseThrow(() ->
+                new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO));
+        memberInfoRepository.save(nicknamePhoneRequestDto.toEntity(memberInfo.getMemberRequestDto().updateNickNameAndPhoneNumber(nicknamePhoneRequestDto, memberInfo.getMemberRequestDto()), memberInfo));
+        log.info("회원 닉네임, 전화번호 수정, {}", nicknamePhoneRequestDto.getNickName());
     }
 
     public void addHashtag(HashtagRequestDto hashtagRequestDto, String uuid) {

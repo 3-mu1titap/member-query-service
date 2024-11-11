@@ -1,14 +1,8 @@
 package com.multitap.memberquery.presentation;
 
-import com.multitap.memberquery.dto.in.HashtagRequestDto;
-import com.multitap.memberquery.dto.in.MemberRequestDto;
-import com.multitap.memberquery.dto.in.MenteeProfileRequestDto;
-import com.multitap.memberquery.dto.in.MentorProfileRequestDto;
+import com.multitap.memberquery.dto.in.*;
 import com.multitap.memberquery.kafka.KafkaConsumerService;
-import com.multitap.memberquery.kafka.messagein.HashtagDto;
-import com.multitap.memberquery.kafka.messagein.MemberDto;
-import com.multitap.memberquery.kafka.messagein.MenteeProfileDto;
-import com.multitap.memberquery.kafka.messagein.MentorProfileDto;
+import com.multitap.memberquery.kafka.messagein.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -27,6 +21,12 @@ public class KafkaConsumer {
     public void processMember(MemberDto memberDto) {
         log.info("Received memberDto, {}", memberDto);
         kafkaConsumerService.addMember(MemberRequestDto.from(memberDto), memberDto.getUuid());
+    }
+
+    @KafkaListener(topics = "create-member-info-topic", groupId = "member-consumer-group", containerFactory = "nicknamePhoneDtoListener")
+    public void processMemberNicknamePhone(NicknamePhoneDto nicknamePhoneDto){
+        log.info("Received nicknamePhoneDto: {}", nicknamePhoneDto.getUuid());
+        kafkaConsumerService.addNicknamePhone(NicknamePhoneRequestDto.from(nicknamePhoneDto), nicknamePhoneDto.getUuid());
     }
 
     @KafkaListener(topics = "create-hashtag-topic", groupId = "member-consumer-group", containerFactory = "hashtagDtoListener")
@@ -49,5 +49,6 @@ public class KafkaConsumer {
         MenteeProfileRequestDto menteeProfileRequestDto = MenteeProfileRequestDto.from(menteeProfileDto);
         kafkaConsumerService.addMenteeProfile(menteeProfileRequestDto, menteeProfileDto.getUuid());
     }
+
 
 }

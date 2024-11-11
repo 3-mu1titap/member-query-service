@@ -2,7 +2,6 @@ package com.multitap.memberquery.application;
 
 import com.multitap.memberquery.common.exception.BaseException;
 import com.multitap.memberquery.common.response.BaseResponseStatus;
-import com.multitap.memberquery.entity.MemberInfo;
 import com.multitap.memberquery.infrastructure.MemberInfoRepository;
 import com.multitap.memberquery.vo.out.MemberInfoResponseDto;
 import lombok.RequiredArgsConstructor;

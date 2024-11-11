@@ -7,6 +7,7 @@ import com.multitap.memberquery.vo.out.MemberInfoResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 @Service
 @RequiredArgsConstructor
 public class MemberInfoServiceImpl implements MemberInfoService {
@@ -18,4 +19,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
         return MemberInfoResponseDto.from(memberInfoRepository.findById(uuid)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO)));
     }
+
+
+
 }

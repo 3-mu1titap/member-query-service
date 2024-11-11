@@ -47,7 +47,7 @@ public class MemberRequestDto {
     public MemberInfo toEntity(MemberRequestDto memberRequestDto, String uuid) {
         return MemberInfo.builder()
                 .id(uuid)
-                .memberRequestDto(memberRequestDto)
+                .accountDetails(memberRequestDto)
                 .build();
     }
 }

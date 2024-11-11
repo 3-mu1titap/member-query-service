@@ -28,10 +28,10 @@ public class MemberInfoResponseDto {
 
     public static MemberInfoResponseDto from(MemberInfo memberInfo) {
         return MemberInfoResponseDto.builder()
-                .memberRequestDto(memberInfo.getMemberRequestDto())
-                .hashtagRequestDto(memberInfo.getHashtagRequestDto())
-                .mentorProfileRequestDto(memberInfo.getMentorProfileRequestDto())
-                .menteeProfileRequestDto(memberInfo.getMenteeProfileRequestDto())
+                .memberRequestDto(memberInfo.getAccountDetails())
+                .hashtagRequestDto(memberInfo.getHashtag())
+                .mentorProfileRequestDto(memberInfo.getMentorProfileInfo())
+                .menteeProfileRequestDto(memberInfo.getMenteeProfileInfo())
                 .build();
     }
 

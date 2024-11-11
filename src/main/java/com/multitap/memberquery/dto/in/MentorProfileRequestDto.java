@@ -36,10 +36,11 @@ public class MentorProfileRequestDto {
     public MemberInfo toEntity(MentorProfileRequestDto mentorProfileRequestDto, MemberInfo memberInfo) {
         return MemberInfo.builder()
                 .id(memberInfo.getId())
-                .memberRequestDto(memberInfo.getMemberRequestDto())
-                .hashtagRequestDto(memberInfo.getHashtagRequestDto())
-                .mentorProfileRequestDto(mentorProfileRequestDto)
-                .menteeProfileRequestDto(memberInfo.getMenteeProfileRequestDto())
+                .profileImageUrl(memberInfo.getProfileImageUrl())
+                .accountDetails(memberInfo.getAccountDetails())
+                .hashtag(memberInfo.getHashtag())
+                .mentorProfileInfo(mentorProfileRequestDto)
+                .menteeProfileInfo(memberInfo.getMenteeProfileInfo())
                 .build();
     }
 

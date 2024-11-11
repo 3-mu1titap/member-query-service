@@ -2,6 +2,7 @@ package com.multitap.memberquery.common.config;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.multitap.memberquery.dto.in.ReactionRequestDto;
 import com.multitap.memberquery.kafka.messagein.*;
 import com.multitap.memberquery.kafka.messagein.MentorProfileDto;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -123,6 +124,23 @@ public class KafkaConsumerConfig {
         return factory;
     }
 
+    @Bean
+    public ConsumerFactory<String, ReactionDto> reactionConsumerFactory() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092, localhost:39092, localhost:49092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "member-consumer-group");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(ReactionDto.class, false));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, ReactionDto> reactionDtoListener() {
+        ConcurrentKafkaListenerContainerFactory<String, ReactionDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(reactionConsumerFactory());
+        return factory;
+    }
 
 }
 

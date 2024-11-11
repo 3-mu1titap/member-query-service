@@ -32,10 +32,11 @@ public class NicknamePhoneRequestDto {
     public MemberInfo toEntity(MemberRequestDto memberRequestDto, MemberInfo memberInfo){
         return MemberInfo.builder()
                 .id(memberInfo.getId())
-                .memberRequestDto(memberRequestDto)
-                .hashtagRequestDto(memberInfo.getHashtagRequestDto())
-                .mentorProfileRequestDto(memberInfo.getMentorProfileRequestDto())
-                .menteeProfileRequestDto(memberInfo.getMenteeProfileRequestDto())
+                .profileImageUrl(memberInfo.getProfileImageUrl())
+                .accountDetails(memberRequestDto)
+                .hashtag(memberInfo.getHashtag())
+                .mentorProfileInfo(memberInfo.getMentorProfileInfo())
+                .menteeProfileInfo(memberInfo.getMenteeProfileInfo())
                 .build();
     }
 }

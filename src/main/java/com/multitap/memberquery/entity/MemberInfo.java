@@ -18,9 +18,10 @@ public class MemberInfo {
     @Id
     private String id;
 
-    private MemberRequestDto memberRequestDto;
-    private HashtagRequestDto hashtagRequestDto;
-    private MentorProfileRequestDto mentorProfileRequestDto;
-    private MenteeProfileRequestDto menteeProfileRequestDto;
+    private String profileImageUrl;
+    private MemberRequestDto accountDetails;
+    private HashtagRequestDto hashtag;
+    private MentorProfileRequestDto mentorProfileInfo;
+    private MenteeProfileRequestDto menteeProfileInfo;
 
 }

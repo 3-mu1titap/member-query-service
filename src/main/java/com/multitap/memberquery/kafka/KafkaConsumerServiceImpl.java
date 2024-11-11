@@ -5,6 +5,7 @@ import com.multitap.memberquery.common.response.BaseResponseStatus;
 import com.multitap.memberquery.dto.in.*;
 import com.multitap.memberquery.entity.MemberInfo;
 import com.multitap.memberquery.infrastructure.MemberInfoRepository;
+import com.multitap.memberquery.infrastructure.ReactionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class KafkaConsumerServiceImpl implements KafkaConsumerService {
 
     private final MemberInfoRepository memberInfoRepository;
+    private final ReactionRepository reactionRepository;
 
     public void addMember(MemberRequestDto memberRequestDto, String uuid) {
         memberInfoRepository.save(memberRequestDto.toEntity(memberRequestDto, uuid));
@@ -25,7 +27,7 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
     public void addNicknamePhone(NicknamePhoneRequestDto nicknamePhoneRequestDto, String uuid) {
         MemberInfo memberInfo = memberInfoRepository.findById(uuid).orElseThrow(() ->
                 new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO));
-        memberInfoRepository.save(nicknamePhoneRequestDto.toEntity(memberInfo.getMemberRequestDto().updateNickNameAndPhoneNumber(nicknamePhoneRequestDto, memberInfo.getMemberRequestDto()), memberInfo));
+        memberInfoRepository.save(nicknamePhoneRequestDto.toEntity(memberInfo.getAccountDetails().updateNickNameAndPhoneNumber(nicknamePhoneRequestDto, memberInfo.getAccountDetails()), memberInfo));
         log.info("회원 닉네임, 전화번호 수정, {}", nicknamePhoneRequestDto.getNickName());
     }
 
@@ -51,5 +53,14 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
                 new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO));
         memberInfoRepository.save(menteeProfileRequestDto.toEntity(menteeProfileRequestDto, memberInfo));
     }
+
+    @Override
+    public void addReaction(ReactionRequestDto reactionRequestDto, String uuid) {
+        log.info("uuid, {}", uuid);
+        MemberInfo memberInfo = memberInfoRepository.findById(uuid).orElseThrow(() ->
+                new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO));
+        reactionRepository.save(reactionRequestDto.toEntity(reactionRequestDto));
+    }
+
 
 }

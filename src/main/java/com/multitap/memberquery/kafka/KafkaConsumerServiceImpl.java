@@ -5,7 +5,6 @@ import com.multitap.memberquery.common.response.BaseResponseStatus;
 import com.multitap.memberquery.dto.in.*;
 import com.multitap.memberquery.entity.MemberInfo;
 import com.multitap.memberquery.infrastructure.MemberInfoRepository;
-import com.multitap.memberquery.infrastructure.ReactionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 public class KafkaConsumerServiceImpl implements KafkaConsumerService {
 
     private final MemberInfoRepository memberInfoRepository;
-    private final ReactionRepository reactionRepository;
 
     public void addMember(MemberRequestDto memberRequestDto, String uuid) {
         memberInfoRepository.save(memberRequestDto.toEntity(memberRequestDto, uuid));
@@ -52,12 +50,6 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
         MemberInfo memberInfo = memberInfoRepository.findById(uuid).orElseThrow(() ->
                 new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO));
         memberInfoRepository.save(menteeProfileRequestDto.toEntity(menteeProfileRequestDto, memberInfo));
-    }
-
-    @Override
-    public void addReaction(ReactionRequestDto reactionRequestDto, String uuid) {
-        log.info("uuid, {}", uuid);
-        reactionRepository.save(reactionRequestDto.toEntity(reactionRequestDto));
     }
 
 

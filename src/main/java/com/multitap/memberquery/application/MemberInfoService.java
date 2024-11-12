@@ -1,6 +1,6 @@
 package com.multitap.memberquery.application;
 import com.multitap.memberquery.dto.in.ProfileImageRequestDto;
-import com.multitap.memberquery.vo.out.MemberInfoResponseDto;
+import com.multitap.memberquery.dto.out.MemberInfoResponseDto;
 
 
 public interface MemberInfoService {

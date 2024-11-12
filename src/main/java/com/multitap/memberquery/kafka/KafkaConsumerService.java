@@ -9,5 +9,4 @@ void addHashtag(HashtagRequestDto hashtagRequestDto, String uuid);
 void addMentorProfile(MentorProfileRequestDto mentorProfilerequestDto, String uuid);
 void addMenteeProfile(MenteeProfileRequestDto menteeProfileRequestDto, String uuid);
 void addNicknamePhone(NicknamePhoneRequestDto nicknamePhoneRequestDto, String uuid);
-void addReaction(ReactionRequestDto reactionRequestDto, String uuid);
 }

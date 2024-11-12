@@ -1,4 +1,4 @@
-package com.multitap.memberquery.vo;
+package com.multitap.memberquery.vo.in;
 
 import lombok.Builder;
 import lombok.Getter;

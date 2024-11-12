@@ -5,7 +5,7 @@ import com.multitap.memberquery.common.response.BaseResponseStatus;
 import com.multitap.memberquery.dto.in.ProfileImageRequestDto;
 import com.multitap.memberquery.entity.MemberInfo;
 import com.multitap.memberquery.infrastructure.MemberInfoRepository;
-import com.multitap.memberquery.vo.out.MemberInfoResponseDto;
+import com.multitap.memberquery.dto.out.MemberInfoResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

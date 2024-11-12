@@ -2,7 +2,6 @@ package com.multitap.memberquery.common.config;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.multitap.memberquery.dto.in.ReactionRequestDto;
 import com.multitap.memberquery.kafka.messagein.*;
 import com.multitap.memberquery.kafka.messagein.MentorProfileDto;
 import org.apache.kafka.common.serialization.StringDeserializer;

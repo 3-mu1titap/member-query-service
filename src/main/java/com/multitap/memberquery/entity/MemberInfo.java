@@ -17,7 +17,6 @@ public class MemberInfo {
 
     @Id
     private String id;
-
     private String profileImageUrl;
     private MemberRequestDto accountDetails;
     private HashtagRequestDto hashtag;

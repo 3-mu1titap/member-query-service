@@ -57,8 +57,6 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
     @Override
     public void addReaction(ReactionRequestDto reactionRequestDto, String uuid) {
         log.info("uuid, {}", uuid);
-        MemberInfo memberInfo = memberInfoRepository.findById(uuid).orElseThrow(() ->
-                new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO));
         reactionRepository.save(reactionRequestDto.toEntity(reactionRequestDto));
     }
 

@@ -57,4 +57,11 @@ public class KafkaConsumer {
         kafkaConsumerService.addReaction(reactionRequestDto, reactionDto.getUuid());
     }
 
+//    @KafkaListener(topics = "create-profile-image-topic", groupId = "member-consumer-group", containerFactory = "reactionDtoListener")
+//    public void processProfileImage(ProfileImageDto profileImageDto) {
+//        log.info("Received reaction: {}", profileImageDto.getProfileImageUrl());
+//        ProfileImageRequestDto profileImageRequestDto = ProfileImageRequestDto.from(profileImageDto);
+//        kafkaConsumerService.addReaction(reactionRequestDto, reactionDto.getUuid());
+//    }
+
 }

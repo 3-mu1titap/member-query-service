@@ -1,6 +1,5 @@
 package com.multitap.memberquery.dto.in;
 
-import com.multitap.memberquery.entity.MemberInfo;
 import com.multitap.memberquery.entity.Reaction;
 import com.multitap.memberquery.kafka.messagein.ReactionDto;
 import lombok.Builder;

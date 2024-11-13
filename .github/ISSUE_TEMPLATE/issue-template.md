@@ -2,7 +2,7 @@
 name: issue template
 about: Describe this issue template's purpose here.
 title: "[FEATURE] SUBIN: ISSUES"
-labels: ''
+labels: '수빈'
 assignees: Seong-Tae-Kim
 
 ---

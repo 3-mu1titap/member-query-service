@@ -3,11 +3,13 @@ package com.multitap.memberquery.application;
 import com.multitap.memberquery.common.exception.BaseException;
 import com.multitap.memberquery.common.response.BaseResponseStatus;
 import com.multitap.memberquery.dto.in.ProfileImageRequestDto;
+import com.multitap.memberquery.dto.out.ReactionProfileDto;
 import com.multitap.memberquery.entity.MemberInfo;
 import com.multitap.memberquery.infrastructure.MemberInfoRepository;
 import com.multitap.memberquery.dto.out.MemberInfoResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 
 
 @Service
@@ -27,6 +29,13 @@ public class MemberInfoServiceImpl implements MemberInfoService {
         MemberInfo memberInfo = memberInfoRepository.findById(profileImageRequestDto.getUuid()).orElseThrow(() ->
                 new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO));
         memberInfoRepository.save(profileImageRequestDto.toEntity(profileImageRequestDto, memberInfo));
+    }
+
+    @Override
+    public ReactionProfileDto getReactionProfile(String uuid) {
+        return ReactionProfileDto.from(memberInfoRepository.findNickNameAndProfileImageUrlById(uuid).orElseThrow(() ->
+                new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO)));
+
     }
 
 }

@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-@Document(collation = "memberInfo")
+@Document
 @Data
 @Builder
 public class MemberInfo {

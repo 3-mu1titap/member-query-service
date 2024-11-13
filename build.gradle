@@ -45,7 +45,6 @@ dependencies {
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    // eureka client
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 }
 

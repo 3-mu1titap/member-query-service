@@ -49,6 +49,7 @@ public enum BaseResponseStatus {
     DUPLICATED_NICKNAME(HttpStatus.CONFLICT, false, 2010, "이미 사용중인 닉네임입니다."),
     SAME_NICKNAME(HttpStatus.CONFLICT, false, 2011, "현재 사용중인 닉네임입니다."),
     INVALID_EMAIL_ADDRESS(HttpStatus.BAD_REQUEST, false, 2012, "이메일을 다시 확인해주세요."),
+    NO_EXIST_MEMBER_INFO(HttpStatus.NOT_FOUND,false,2013,"회원정보를 먼저 등록하세요"),
 
 
     /**

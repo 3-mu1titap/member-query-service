@@ -1,24 +1,26 @@
 package com.multitap.memberquery.entity;
 
-import com.multitap.memberquery.infrastructure.kafka.messagein.HashtagDto;
-import com.multitap.memberquery.infrastructure.kafka.messagein.MemberDto;
-import com.multitap.memberquery.infrastructure.kafka.messagein.MenteeProfileDto;
-import com.multitap.memberquery.infrastructure.kafka.messagein.MentorProfileDto;
+import com.multitap.memberquery.dto.in.HashtagRequestDto;
+import com.multitap.memberquery.dto.in.MemberRequestDto;
+import com.multitap.memberquery.dto.in.MenteeProfileRequestDto;
+import com.multitap.memberquery.dto.in.MentorProfileRequestDto;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
 
-@Document(collation = "memberInfo")
+@Document
 @Data
+@Builder
 public class MemberInfo {
 
     @Id
-    private String uuid;
-    private MemberDto memberDto;
-    private List<HashtagDto> hashtagDto;
-    private MentorProfileDto mentorProfileDto;
-    private MenteeProfileDto menteeProfileDto;
+    private String id;
+    private String profileImageUrl;
+    private MemberRequestDto accountDetails;
+    private HashtagRequestDto hashtag;
+    private MentorProfileRequestDto mentorProfileInfo;
+    private MenteeProfileRequestDto menteeProfileInfo;
 
 }

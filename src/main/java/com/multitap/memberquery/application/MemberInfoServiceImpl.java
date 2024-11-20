@@ -32,7 +32,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
     }
 
     @Override
-    public ReactionProfileDto getReactionProfile(String uuid) {
+    public ReactionProfileDto getProfileImage(String uuid) {
         return ReactionProfileDto.from(memberInfoRepository.findNickNameAndProfileImageUrlById(uuid).orElseThrow(() ->
                 new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO)));
 

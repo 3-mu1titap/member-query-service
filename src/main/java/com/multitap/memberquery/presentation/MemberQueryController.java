@@ -36,10 +36,10 @@ public class MemberQueryController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "관심 멘토 리스트 반환", description = "관심멘토로 등록한 멘토의 프로필이미지, 닉네임을 반환합니다.")
-    @PostMapping("/like")
-    public BaseResponse<ReactionProfileVo> getMemberLike(@RequestHeader("Uuid") String uuid) {
-        return new BaseResponse<>(memberInfoService.getReactionProfile(uuid).toVo());
+    @Operation(summary = "회원 프로필 이미지, 닉네임 반환", description = "uuid를 통해 회원의 프로필이미지, 닉네임을 반환합니다.")
+    @GetMapping("/profileImage")
+    public BaseResponse<ReactionProfileVo> getMemberProfileImage(@RequestHeader("Uuid") String uuid) {
+        return new BaseResponse<>(memberInfoService.getProfileImage(uuid).toVo());
     }
 
 }

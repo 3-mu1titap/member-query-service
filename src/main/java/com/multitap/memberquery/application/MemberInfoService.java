@@ -7,5 +7,5 @@ import com.multitap.memberquery.dto.out.ReactionProfileDto;
 public interface MemberInfoService {
  MemberInfoResponseDto getMemberInfo(String uuid);
  void addProfileImage(ProfileImageRequestDto profileImageRequestDto);
- ReactionProfileDto getReactionProfile(String uuid);
+ ReactionProfileDto getProfileImage(String uuid);
 }

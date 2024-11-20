@@ -25,20 +25,20 @@ public class MemberQueryController {
 
     @Operation(summary = "회원 마이페이지 프로필 조회", description = "프로필에 등록 된 정보를 조회합니다.")
     @GetMapping("/profile")
-    public BaseResponse<MemberInfoResponseVo> getMemberInfo(@RequestHeader("Uuid") String uuid) {
+    public BaseResponse<MemberInfoResponseVo> getMemberInfo(@RequestHeader("userUuid") String uuid) {
         return new BaseResponse<>(memberInfoService.getMemberInfo(uuid).toVo());
     }
 
     @Operation(summary = "프로필 이미지 등록", description = "회원의 프로필 이미지 s3 URL을 등록합니다.")
     @PostMapping("/profileImage")
-    public BaseResponse<Void> addProfileImage(@RequestHeader("Uuid") String uuid, @RequestBody ProfileImageRequestVo profileImageRequestVo) {
+    public BaseResponse<Void> addProfileImage(@RequestHeader("userUuid") String uuid, @RequestBody ProfileImageRequestVo profileImageRequestVo) {
         memberInfoService.addProfileImage(ProfileImageRequestDto.from(profileImageRequestVo, uuid));
         return new BaseResponse<>();
     }
 
     @Operation(summary = "회원 프로필 이미지, 닉네임 반환", description = "uuid를 통해 회원의 프로필이미지, 닉네임을 반환합니다.")
     @GetMapping("/profileImage")
-    public BaseResponse<ReactionProfileVo> getMemberProfileImage(@RequestHeader("Uuid") String uuid) {
+    public BaseResponse<ReactionProfileVo> getMemberProfileImage(@RequestHeader("userUuid") String uuid) {
         return new BaseResponse<>(memberInfoService.getProfileImage(uuid).toVo());
     }
 

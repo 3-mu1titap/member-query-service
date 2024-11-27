@@ -2,8 +2,7 @@ package com.multitap.memberquery.common.config;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.multitap.memberquery.kafka.messagein.*;
-import com.multitap.memberquery.kafka.messagein.MentorProfileDto;
+import com.multitap.memberquery.kafka.consumer.messagein.*;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.context.annotation.Bean;

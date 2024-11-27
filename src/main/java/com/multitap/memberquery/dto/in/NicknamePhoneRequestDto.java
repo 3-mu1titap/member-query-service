@@ -1,7 +1,7 @@
 package com.multitap.memberquery.dto.in;
 
 import com.multitap.memberquery.entity.MemberInfo;
-import com.multitap.memberquery.kafka.messagein.NicknamePhoneDto;
+import com.multitap.memberquery.kafka.consumer.messagein.NicknamePhoneDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

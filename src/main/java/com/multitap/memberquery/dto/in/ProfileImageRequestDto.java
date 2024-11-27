@@ -1,8 +1,7 @@
 package com.multitap.memberquery.dto.in;
 
 import com.multitap.memberquery.entity.MemberInfo;
-import com.multitap.memberquery.kafka.messagein.ProfileImageDto;
-import com.multitap.memberquery.vo.in.ProfileImageRequestVo;
+import com.multitap.memberquery.kafka.consumer.messagein.ProfileImageDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

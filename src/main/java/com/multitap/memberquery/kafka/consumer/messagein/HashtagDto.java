@@ -1,4 +1,4 @@
-package com.multitap.memberquery.kafka.messagein;
+package com.multitap.memberquery.kafka.consumer.messagein;
 
 import com.multitap.memberquery.dto.in.HashtagRequestDto;
 import lombok.Builder;

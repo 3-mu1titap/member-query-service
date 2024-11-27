@@ -1,4 +1,4 @@
-package com.multitap.memberquery.kafka;
+package com.multitap.memberquery.kafka.consumer;
 
 import com.multitap.memberquery.dto.in.*;
 

@@ -1,8 +1,8 @@
 package com.multitap.memberquery.presentation;
 
 import com.multitap.memberquery.dto.in.*;
-import com.multitap.memberquery.kafka.KafkaConsumerService;
-import com.multitap.memberquery.kafka.messagein.*;
+import com.multitap.memberquery.kafka.consumer.KafkaConsumerService;
+import com.multitap.memberquery.kafka.consumer.messagein.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

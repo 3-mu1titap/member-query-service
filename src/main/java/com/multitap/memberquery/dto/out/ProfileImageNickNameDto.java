@@ -1,35 +1,33 @@
 package com.multitap.memberquery.dto.out;
 
 import com.multitap.memberquery.entity.MemberInfo;
-import com.multitap.memberquery.vo.out.ReactionProfileVo;
+import com.multitap.memberquery.vo.out.ProfileImageNickNameVo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.lang.reflect.Member;
-
 @Getter
 @NoArgsConstructor
-public class ReactionProfileDto {
+public class ProfileImageNickNameDto {
 
     private String nickName;
     private String profileImageUrl;
 
     @Builder
-    public ReactionProfileDto(String nickName, String profileImageUrl) {
+    public ProfileImageNickNameDto(String nickName, String profileImageUrl) {
         this.nickName = nickName;
         this.profileImageUrl = profileImageUrl;
     }
 
-    public static ReactionProfileDto from(MemberInfo memberInfo) {
-        return ReactionProfileDto.builder()
+    public static ProfileImageNickNameDto from(MemberInfo memberInfo) {
+        return ProfileImageNickNameDto.builder()
                 .nickName(memberInfo.getAccountDetails().getNickName())
                 .profileImageUrl(memberInfo.getProfileImageUrl())
                 .build();
     }
 
-    public ReactionProfileVo toVo() {
-        return ReactionProfileVo.builder()
+    public ProfileImageNickNameVo toVo() {
+        return ProfileImageNickNameVo.builder()
                 .nickName(nickName)
                 .profileImageUrl(profileImageUrl)
                 .build();

@@ -29,6 +29,13 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
         log.info("회원 닉네임, 전화번호 수정, {}", nicknamePhoneRequestDto.getNickName());
     }
 
+    @Override
+    public void addProfileImage(ProfileImageRequestDto profileImageRequestDto) {
+        MemberInfo memberInfo = memberInfoRepository.findById(profileImageRequestDto.getUuid()).orElseThrow(() ->
+                new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO));
+        memberInfoRepository.save(profileImageRequestDto.toEntity(profileImageRequestDto, memberInfo));
+    }
+
     public void addHashtag(HashtagRequestDto hashtagRequestDto, String uuid) {
         log.info("uuid, {}", uuid);
         MemberInfo memberInfo = memberInfoRepository.findById(uuid).orElseThrow(() ->

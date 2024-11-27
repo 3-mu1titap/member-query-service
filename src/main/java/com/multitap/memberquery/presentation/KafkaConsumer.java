@@ -50,18 +50,11 @@ public class KafkaConsumer {
         kafkaConsumerService.addMenteeProfile(menteeProfileRequestDto, menteeProfileDto.getUuid());
     }
 
-//    @KafkaListener(topics = "create-reaction-topic", groupId = "member-consumer-group", containerFactory = "reactionDtoListener")
-//    public void processReaction(ReactionDto reactionDto) {
-//        log.info("Received reaction: {}", reactionDto.getUuid());
-//        ReactionRequestDto reactionRequestDto = ReactionRequestDto.from(reactionDto);
-//        kafkaConsumerService.addReaction(reactionRequestDto, reactionDto.getUuid());
-//    }
-
-//    @KafkaListener(topics = "create-profile-image-topic", groupId = "member-consumer-group", containerFactory = "reactionDtoListener")
-//    public void processProfileImage(ProfileImageDto profileImageDto) {
-//        log.info("Received reaction: {}", profileImageDto.getProfileImageUrl());
-//        ProfileImageRequestDto profileImageRequestDto = ProfileImageRequestDto.from(profileImageDto);
-//        kafkaConsumerService.addReaction(reactionRequestDto, reactionDto.getUuid());
-//    }
+    @KafkaListener(topics = "create-profile-image-topic", groupId = "member-consumer-group", containerFactory = "profileImageDtoListener")
+    public void processProfileImage(ProfileImageDto profileImageDto) {
+        log.info("Received profileImage: {}", profileImageDto.getProfileImageUrl());
+        ProfileImageRequestDto profileImageRequestDto = ProfileImageRequestDto.from(profileImageDto);
+        kafkaConsumerService.addProfileImage(profileImageRequestDto);
+    }
 
 }

@@ -37,5 +37,6 @@ public class SwaggerConfig {
                 .title("MEMBER QUERY SERVICE")
                 .description("MEMBER QUERY SERVICE Swagger UI")
                 .version("1.0.0");
+        //
     }
 }

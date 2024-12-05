@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+
 @RequiredArgsConstructor
 @Slf4j
 @Component
@@ -48,13 +49,6 @@ public class KafkaConsumer {
         log.info("Received menteeProfile: {}", menteeProfileDto.getUuid());
         MenteeProfileRequestDto menteeProfileRequestDto = MenteeProfileRequestDto.from(menteeProfileDto);
         kafkaConsumerService.addMenteeProfile(menteeProfileRequestDto, menteeProfileDto.getUuid());
-    }
-
-    @KafkaListener(topics = "create-profile-image-topic", groupId = "member-consumer-group", containerFactory = "profileImageDtoListener")
-    public void processProfileImage(ProfileImageDto profileImageDto) {
-        log.info("Received profileImage: {}", profileImageDto.getProfileImageUrl());
-        ProfileImageRequestDto profileImageRequestDto = ProfileImageRequestDto.from(profileImageDto);
-        kafkaConsumerService.addProfileImage(profileImageRequestDto);
     }
 
 }

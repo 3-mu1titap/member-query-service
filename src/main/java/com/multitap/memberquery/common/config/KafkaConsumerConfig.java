@@ -122,23 +122,6 @@ public class KafkaConsumerConfig {
         return factory;
     }
 
-    @Bean
-    public ConsumerFactory<String, ProfileImageDto> profileImageConsumerFactory() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka-1:19092,kafka-2:19092,kafka-3:19092");
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "member-consumer-group");
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
-        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(ProfileImageDto.class, false));
-    }
-
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, ProfileImageDto> profileImageDtoListener() {
-        ConcurrentKafkaListenerContainerFactory<String, ProfileImageDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(profileImageConsumerFactory());
-        return factory;
-    }
 
 }
 

@@ -44,10 +44,11 @@ public class MemberRequestDto {
                 .build();
     }
 
-    public MemberInfo toEntity(MemberRequestDto memberRequestDto, String uuid) {
+    public MemberInfo toEntity(MemberRequestDto memberRequestDto, String uuid, String profileImage) {
         return MemberInfo.builder()
                 .id(uuid)
                 .accountDetails(memberRequestDto)
+                .profileImageUrl(profileImage)
                 .build();
     }
 }

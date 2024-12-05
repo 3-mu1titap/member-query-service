@@ -14,14 +14,16 @@ public class MemberDto {
     private String email;
     private String accountId;
     private String phoneNumber;
+    private String profileImage;
 
     @Builder
-    public MemberDto(String uuid, String name, String nickName, String email, String accountId, String phoneNumber) {
+    public MemberDto(String uuid, String name, String nickName, String email, String accountId, String phoneNumber, String profileImage) {
         this.uuid = uuid;
         this.name = name;
         this.nickName = nickName;
         this.email = email;
         this.accountId = accountId;
         this.phoneNumber = phoneNumber;
+        this.profileImage = profileImage;
     }
 }

@@ -20,8 +20,8 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
     private final MemberInfoRepository memberInfoRepository;
     private final KafkaProducerService kafkaProducerService;
 
-    public void addMember(MemberRequestDto memberRequestDto, String uuid) {
-        memberInfoRepository.save(memberRequestDto.toEntity(memberRequestDto, uuid));
+    public void addMember(MemberRequestDto memberRequestDto, String uuid, String profileImage) {
+        memberInfoRepository.save(memberRequestDto.toEntity(memberRequestDto, uuid, profileImage));
         log.info("회원가입 정보 저장 성공,{}", memberRequestDto.getName());
     }
 
@@ -62,6 +62,5 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
                 new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO));
         memberInfoRepository.save(menteeProfileRequestDto.toEntity(menteeProfileRequestDto, memberInfo));
     }
-
 
 }

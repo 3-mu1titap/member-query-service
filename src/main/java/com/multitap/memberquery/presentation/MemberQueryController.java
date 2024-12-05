@@ -2,10 +2,8 @@ package com.multitap.memberquery.presentation;
 
 import com.multitap.memberquery.application.MemberInfoService;
 import com.multitap.memberquery.common.response.BaseResponse;
-import com.multitap.memberquery.dto.in.ProfileImageRequestDto;
-import com.multitap.memberquery.vo.in.ProfileImageRequestVo;
 import com.multitap.memberquery.vo.out.MemberInfoResponseVo;
-import com.multitap.memberquery.vo.out.ReactionProfileVo;
+import com.multitap.memberquery.vo.out.ProfileImageNickNameVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -29,17 +27,16 @@ public class MemberQueryController {
         return new BaseResponse<>(memberInfoService.getMemberInfo(uuid).toVo());
     }
 
-    @Operation(summary = "프로필 이미지 등록", description = "회원의 프로필 이미지 s3 URL을 등록합니다.")
-    @PostMapping("/profileImage")
-    public BaseResponse<Void> addProfileImage(@RequestHeader("userUuid") String uuid, @RequestBody ProfileImageRequestVo profileImageRequestVo) {
-        memberInfoService.addProfileImage(ProfileImageRequestDto.from(profileImageRequestVo, uuid));
-        return new BaseResponse<>();
+    @Operation(summary = "회원 프로필 이미지, 닉네임 반환", description = "uuid를 통해 회원의 프로필이미지, 닉네임을 반환합니다.")
+    @GetMapping("/profileImage")
+    public BaseResponse<ProfileImageNickNameVo> getMemberProfileImage(@RequestHeader("userUuid") String uuid) {
+        return new BaseResponse<>(memberInfoService.getProfileImage(uuid).toVo());
     }
 
     @Operation(summary = "회원 프로필 이미지, 닉네임 반환", description = "uuid를 통해 회원의 프로필이미지, 닉네임을 반환합니다.")
-    @GetMapping("/profileImage")
-    public BaseResponse<ReactionProfileVo> getMemberProfileImage(@RequestHeader("userUuid") String uuid) {
-        return new BaseResponse<>(memberInfoService.getProfileImage(uuid).toVo());
+    @GetMapping("/profileImage-review")
+    public ProfileImageNickNameVo getMemberProfileImageForReview(@RequestHeader("userUuid") String uuid) {
+        return memberInfoService.getProfileImage(uuid).toVo();
     }
 
 }

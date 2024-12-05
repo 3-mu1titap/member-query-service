@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class ReactionProfileVo {
+public class ProfileImageNickNameVo {
 
     private String nickName;
     private String profileImageUrl;
 
     @Builder
-    public ReactionProfileVo(String nickName, String profileImageUrl) {
+    public ProfileImageNickNameVo(String nickName, String profileImageUrl) {
         this.nickName = nickName;
         this.profileImageUrl = profileImageUrl;
     }

@@ -1,14 +1,15 @@
 package com.multitap.memberquery.presentation;
 
 import com.multitap.memberquery.dto.in.*;
-import com.multitap.memberquery.kafka.KafkaConsumerService;
-import com.multitap.memberquery.kafka.messagein.*;
+import com.multitap.memberquery.kafka.consumer.KafkaConsumerService;
+import com.multitap.memberquery.kafka.consumer.messagein.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 
 @RequiredArgsConstructor
 @Slf4j
@@ -20,13 +21,13 @@ public class KafkaConsumer {
     @KafkaListener(topics = "create-member-topic", groupId = "member-consumer-group", containerFactory = "memberDtoListener")
     public void processMember(MemberDto memberDto) {
         log.info("Received memberDto, {}", memberDto);
-        kafkaConsumerService.addMember(MemberRequestDto.from(memberDto), memberDto.getUuid());
+        kafkaConsumerService.addMember(MemberRequestDto.from(memberDto), memberDto.getUuid(), memberDto.getProfileImage());
     }
 
     @KafkaListener(topics = "create-member-info-topic", groupId = "member-consumer-group", containerFactory = "nicknamePhoneDtoListener")
     public void processMemberNicknamePhone(NicknamePhoneDto nicknamePhoneDto){
         log.info("Received nicknamePhoneDto: {}", nicknamePhoneDto.getUuid());
-        kafkaConsumerService.addNicknamePhone(NicknamePhoneRequestDto.from(nicknamePhoneDto), nicknamePhoneDto.getUuid());
+        kafkaConsumerService.addNicknamePhone(NicknamePhoneRequestDto.from(nicknamePhoneDto),nicknamePhoneDto.getUuid());
     }
 
     @KafkaListener(topics = "create-hashtag-topic", groupId = "member-consumer-group", containerFactory = "hashtagDtoListener")
@@ -50,6 +51,12 @@ public class KafkaConsumer {
         kafkaConsumerService.addMenteeProfile(menteeProfileRequestDto, menteeProfileDto.getUuid());
     }
 
+    @KafkaListener(topics = "create-profile-image-topic", groupId = "member-consumer-group", containerFactory = "profileImageDtoListener")
+    public void processMentorProfile(ProfileImageDto profileImageDto) {
+        log.info("Received menteeProfile: {}", profileImageDto.getUuid());
+        ProfileImageRequestDto profileImageRequestDto = ProfileImageRequestDto.from(profileImageDto);
+        kafkaConsumerService.addProfileImage(profileImageRequestDto);
+    }
 
 
 }

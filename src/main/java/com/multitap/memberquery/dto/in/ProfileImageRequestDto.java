@@ -1,7 +1,7 @@
 package com.multitap.memberquery.dto.in;
 
 import com.multitap.memberquery.entity.MemberInfo;
-import com.multitap.memberquery.vo.in.ProfileImageRequestVo;
+import com.multitap.memberquery.kafka.consumer.messagein.ProfileImageDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,10 +19,10 @@ public class ProfileImageRequestDto {
         this.profileImageUrl = profileImageUrl;
     }
 
-    public static ProfileImageRequestDto from(ProfileImageRequestVo profileImageRequestVo, String uuid) {
+    public static ProfileImageRequestDto from(ProfileImageDto profileImageDto) {
         return ProfileImageRequestDto.builder()
-                .uuid(uuid)
-                .profileImageUrl(profileImageRequestVo.getProfileImageUrl())
+                .uuid(profileImageDto.getUuid())
+                .profileImageUrl(profileImageDto.getProfileImageUrl())
                 .build();
     }
 
